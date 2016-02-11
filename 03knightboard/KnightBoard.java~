@@ -1,0 +1,22 @@
+public class KnightBoard {
+    private String name;
+    private int[][] board;
+    
+    public KnightBoard(int size) {
+	name = "KOTLIK,MIKHAIL";
+	board = new int[size][size];
+    }
+
+    public String name() {
+	return name;
+    }
+
+    public boolean solve() {
+	return true;
+    }
+
+    public void printSolution() {
+	System.out.println("Eureka!");
+    }
+    
+}
