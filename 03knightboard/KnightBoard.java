@@ -32,6 +32,8 @@ public class KnightBoard {
 		return false;
     }
 	
+	//Misha's move order variant
+	//Works better on 6 by 6, 8 by 8
 	public boolean solveH(int row, int col, int move) {
 		if (move > cols * rows) {
 			if (closed) {
@@ -64,6 +66,43 @@ public class KnightBoard {
 		board[row][col] = 0;
 		return false;
 	}
+	
+	/*
+	//Kevin's move order variant
+	//Works better on 7 by 7
+	public boolean solveH(int row, int col, int move) {
+		if (move > cols * rows) {
+			if (closed) {
+				return row == initRow && col == initCol;
+			} else {
+				return true;
+			}
+		}
+		if (! isOnBoard(row, col)) return false;
+		if (board[row][col] != 0) return false;
+		board[row][col] = move;
+		debug(toString());
+		if (solveH(row + 2, col + 1, move + 1)) {
+			return true;
+		} else if (solveH(row + 2, col - 1, move + 1)) {
+			return true;
+		} else if (solveH(row - 2, col + 1, move + 1)) {
+			return true;
+		} else if (solveH(row - 2, col - 1, move + 1)) {
+			return true;
+		} else if (solveH(row + 1, col + 2, move + 1)) {
+			return true;
+		} else if (solveH(row + 1, col - 2, move + 1)) {
+			return true;
+		} else if (solveH(row - 1, col + 2, move + 1)) {
+			return true;
+		} else if (solveH(row - 1, col - 2, move + 1)) {
+			return true;
+		}
+		board[row][col] = 0;
+		return false;
+	}
+	*/
 	
 	private boolean isOnBoard(int row, int col) {
 		return row >= 0 && row < rows && col >= 0 && col < cols;
