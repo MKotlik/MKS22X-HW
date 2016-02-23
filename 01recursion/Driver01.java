@@ -24,5 +24,15 @@ public class Driver01 {
 		for (int i = 0; i < 37; i++) {
 			System.out.println(guesser.sqrt(i));
 		}
+		System.out.println("--TESTS FROM 0 TO 1--");
+		for (double j = 0; j <= 1.00; j += 0.01) {
+		    System.out.println(guesser.sqrt(j));
+		}
+		System.out.println("--NEGATIVE ARGUMENT TEST--");
+		try {
+		    System.out.println(guesser.sqrt(-20));
+		} catch(IllegalArgumentException e) {
+		    System.out.println("SUCCESS: Exception Thrown");
+		}
 	}
 }
