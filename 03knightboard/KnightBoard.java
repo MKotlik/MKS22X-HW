@@ -108,7 +108,7 @@ public class KnightBoard {
 		return row >= 0 && row < rows && col >= 0 && col < cols;
 	}
 
-    public String toString() {
+    public String toStringOLD() {
 		String boardStr = "";
 		for (int row = 0; row < rows; row++) {
 			String rowStr = "";
@@ -119,6 +119,33 @@ public class KnightBoard {
 		}
 		return boardStr;
     }
+	
+	public String toString() {
+		int maxDigits = countDigits(rows * cols);
+		String boardStr = "";
+		for (int row = 0; row < rows; row++) {
+			String rowStr = "";
+			for (int col = 0; col < cols; col++) {
+				int diff = maxDigits - countDigits(board[row][col]);
+				if (diff > 0) {
+					for (int i = 0; i < diff; i++) {
+						rowStr += " ";
+					}
+				}
+				rowStr += board[row][col] + " ";
+			}
+			boardStr += rowStr + "\n";
+		}
+		return boardStr;
+	}
+	
+	private int countDigits(int num) {
+		int count = 1; //Has to be at least one digit, and while loop won't count it
+		while ((num = num / 10) != 0) {
+			count++;
+		}
+		return count;
+	}
 
     public void printSolution() {
 		System.out.println(toString());
