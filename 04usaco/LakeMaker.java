@@ -198,7 +198,7 @@ public class LakeMaker {
 		//Stomp
 		for (int r = row; r <= rowLimit; r++) {
 			for (int c = col; c <= colLimit; c++) {
-				if (maxValue - lakeMap[r][c] >= diff) {
+				if (maxValue == lakeMap[r][c]) {
 					lakeMap[r][c] -= diff;
 				} else if (maxValue - lakeMap[r][c] < diff) {
 					lakeMap[r][c] = maxValue - diff;
