@@ -8,29 +8,33 @@ import java.io.FileNotFoundException;
 public class LakeMaker {
     //Main
     public static void main(String[]args) {
-	if (DEBUG) {
-	    LakeMaker solver = new LakeMaker();
-	    if (solver.isReadSuccess()) {
-		solver.printLakeMap();
-		System.out.println("--");
-		solver.printInstructions();
-		solver.solve();
-		System.out.println("--");
-		solver.printLakeMap();
-		solver.printVolume();
-	    }
-	} else {
-	    LakeMaker solver = new LakeMaker();
-	    if (solver.isReadSuccess()) {
-		solver.solve();
-		System.out.println(solver.getVolume() + ",6,KOTLIK,MIKHAIL";
-				   } else {
-
+		if (DEBUG) {
+			LakeMaker solver;
+			if (args.length == 1) {
+				solver = new LakeMaker(args[0]);
+			} else {
+				solver = new LakeMaker();
+			}
+			if (solver.isReadSuccess()) {
+			solver.printLakeMap();
+			System.out.println("--");
+			solver.printInstructions();
+			solver.solve();
+			System.out.println("--");
+			solver.printLakeMap();
+			solver.printVolume();
+			}
+		} else {
+			LakeMaker solver = new LakeMaker();
+			if (solver.isReadSuccess()) {
+				solver.solve();
+				System.out.println(solver.getVolume() + ",6,KOTLIK,MIKHAIL");
+			}
+		}
 	}
-    }
 	
     //Variables
-    private static boolean DEBUG = true;
+    private static boolean DEBUG = false;
     private String fileName;
     private boolean readSuccess;
     private int[][] lakeMap;
@@ -44,6 +48,11 @@ public class LakeMaker {
     //Constructor
 	public LakeMaker() {
 	    fileName = "makelake.in";
+		readSuccess = readFile();
+	}
+	
+	public LakeMaker(String fileName) {
+		this.fileName = fileName;
 		readSuccess = readFile();
 	}
 
@@ -90,7 +99,7 @@ public class LakeMaker {
 
     //Print Methods
     public void printVolume() {
-	System.out.println(volume);
+		System.out.println(volume);
     }
     
 	public void printInstructions() {
@@ -184,9 +193,8 @@ public class LakeMaker {
 	}
 
     public int getVolume() {
-	return volume;
+		return volume;
     }
-
 
     //Helpers
 	private void stomp(int[] instr) {
@@ -205,7 +213,7 @@ public class LakeMaker {
 		if (col + 2 < cols) {
 			colLimit = col + 2;
 		} else {
-			colLimit = col - 1;
+			colLimit = cols - 1;
 		}
 		//Find highest depth in stomping ground
 		int maxValue = 0;
@@ -227,14 +235,14 @@ public class LakeMaker {
 	}
 
     private void calculateVolume() {
-	int sumDepth = 0;
-	for (int r = 0; r < rows; r++) {
-	    for (int c = 0; c < cols; c++) {
-		if (lakeMap[r][c] < finElev) {
-		    sumDepth += finElev - lakeMap[r][c];
+		int sumDepth = 0;
+		for (int r = 0; r < rows; r++) {
+			for (int c = 0; c < cols; c++) {
+				if (lakeMap[r][c] < finElev) {
+					sumDepth += finElev - lakeMap[r][c];
+				}
+			}
 		}
-	    }
-	}
-	volume = sumDepth*72*72; //Vol in in^3 = depth in in * 72in *72in
+		volume = sumDepth*72*72; //Vol in in^3 = depth in in * 72in *72in
     }
 }
