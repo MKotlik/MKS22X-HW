@@ -5,15 +5,15 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 
-public class LakeMaker {
+public class Bronze {
     //Main
     public static void main(String[]args) {
 		if (DEBUG) {
-			LakeMaker solver;
+			Bronze solver;
 			if (args.length == 1) {
-				solver = new LakeMaker(args[0]);
+				solver = new Bronze(args[0]);
 			} else {
-				solver = new LakeMaker();
+				solver = new Bronze();
 			}
 			if (solver.isReadSuccess()) {
 			solver.printLakeMap();
@@ -25,7 +25,7 @@ public class LakeMaker {
 			solver.printVolume();
 			}
 		} else {
-			LakeMaker solver = new LakeMaker();
+			Bronze solver = new Bronze();
 			if (solver.isReadSuccess()) {
 				solver.solve();
 				System.out.println(solver.getVolume() + ",6,KOTLIK,MIKHAIL");
@@ -46,12 +46,12 @@ public class LakeMaker {
     private int volume;
     
     //Constructor
-	public LakeMaker() {
+	public Bronze() {
 	    fileName = "makelake.in";
 		readSuccess = readFile();
 	}
 	
-	public LakeMaker(String fileName) {
+	public Bronze(String fileName) {
 		this.fileName = fileName;
 		readSuccess = readFile();
 	}
