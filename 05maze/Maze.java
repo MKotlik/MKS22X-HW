@@ -3,10 +3,10 @@ import java.io.*;
 
 public class Maze{
 
+	private boolean readSuccess; //whether file as found, prevents solve() crash
     private char[][]maze;
     private int startx,starty; //location of start
 	private int endx,endy; //location of goal
-	//Uhh, I'm confused about the orientation of the axes. What is x and what is y?
     private boolean animate;
 
     /*Constructor loads a maze text file.
@@ -23,7 +23,9 @@ public class Maze{
     public Maze(String fileName, boolean ani){
         //COMPLETE CONSTRUCTOR
 		try {
-			Scanner fileIn = new Scanner(new FileReader(fileName));
+			FileReader fRead = new FileReader(fileName);
+			Scanner fileIn = new Scanner(fRead);
+			readSuccess = true;
 			//Count lines
 			int lineCount = 0;
 			int lineLength = 0;
@@ -61,6 +63,7 @@ public class Maze{
 			//Set animation state
 			animate = ani;
 		} catch (FileNotFoundException e) {
+			readSuccess = false;
 			System.out.println("MAZE ERROR: Could not find file: " + fileName);
 		}
     }
@@ -71,6 +74,9 @@ public class Maze{
        When no S is contained in maze, print an error and return false.
     */
     public boolean solve(){
+		if (!readSuccess) { //if maze not loaded
+			return false;
+		}
         if(startx < 0){
             System.out.println("No starting point 'S' found in maze.");
             return false;
@@ -129,6 +135,9 @@ public class Maze{
     }
 
     public String toString(){
+		if (!readSuccess) {
+			return "Maze file not found.";
+		}
         int maxx = maze.length;
         int maxy = maze[0].length;
         String ans = "";
