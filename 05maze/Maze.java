@@ -39,6 +39,8 @@ public class Maze{
 			fileIn = new Scanner(new FileReader(fileName));
 			//Build maze array, and find start & goal
 			maze = new char[lineLength][lineCount];
+			startx = -1;
+			endx = -1;
 			for (int r = 0; r < lineCount; r++) {
 				String row = fileIn.nextLine(); //get line
 				//Check start presence
@@ -72,7 +74,10 @@ public class Maze{
         if(startx < 0){
             System.out.println("No starting point 'S' found in maze.");
             return false;
-        }else{
+		} else if (endx < 0) { 
+			System.out.println("No goal 'E' found in maze.");
+			return false;
+		} else{
             maze[startx][starty] = ' ';
             return solve(startx,starty);
         }
@@ -93,13 +98,28 @@ public class Maze{
 
     */
     private boolean solve(int x, int y){
+		//Animation
         if(animate){
             System.out.println(this);
             wait(20);
         }
-
-        //COMPLETE SOLVE
-        return false; //so it compiles
+		if (maze[x][y] == 'E') { //If goal reached
+			return true;
+		}
+		if (maze[x][y] == ' ') { //If clear space
+			maze[x][y] = '@'; //Mark visited
+			//Check further moves
+			if (solve(x,y+1) ||
+				solve(x,y-1) ||
+				solve(x+1,y) ||
+				solve(x-1,y)) {
+					return true;
+				} else { //No solution possible from here
+					maze[x][y] = '.'; //mark failed
+					return false;
+				}
+		}
+		return false; //If on wall or visited spot, return false
     }
 
     //FREE STUFF!!! *you should be aware of this*
