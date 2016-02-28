@@ -131,7 +131,9 @@ public class Maze{
     //FREE STUFF!!! *you should be aware of this*
 
     public void clearTerminal(){
-        System.out.println(CLEAR_SCREEN);
+		if (readSuccess) {
+			System.out.println(CLEAR_SCREEN);
+		}
     }
 
     public String toString(){
