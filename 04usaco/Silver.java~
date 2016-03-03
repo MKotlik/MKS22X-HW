@@ -1,0 +1,33 @@
+import java.util.Arrays;
+import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
+public class Silver {
+    //Variables
+    private static boolean DEBUG = false;
+    private String fileName;
+    private boolean readSuccess;
+    private int[][] pasture1;
+    private int rows;
+    private int cols;
+    private int startX;
+    private int startY;
+    private int endX;
+    private int endY;
+    private int timeLimit;
+
+    //Constructor
+    public Silver(String fileName) {
+	this.fileName = fileName;
+	readSuccess = readFile();
+    }
+
+    public Silver() {
+	fileName = "ctravel.in";
+	readSuccess = readFile();
+    }
+
+}
