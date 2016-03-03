@@ -6,6 +6,12 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 
 public class Silver {
+    //Main
+    public static void main(String[]args) {
+	Silver cowField = new Silver();
+	System.out.println(cowField);
+    }
+
     //Variables
     private static boolean DEBUG = false;
     private String fileName;
@@ -67,5 +73,15 @@ public class Silver {
 	}
     }
 
-
+    public String toStringPasture() {
+	String pastureStr = "";
+	for (int row = 0; row < rows; row++) {
+	    String rowStr = "";
+	    for (int col = 0; col < cols; col++) {
+		rowStr += pasture1[row][col] + ' ';
+	    }
+	    pastureStr = rowStr + '\n';
+	}
+	return pastureStr;
+    }
 }

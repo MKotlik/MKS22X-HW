@@ -51,7 +51,7 @@ public class Bronze {
 		readSuccess = readFile();
 	}
 	
-	public Bronze(String fileName) {
+    public Bronze(String fileName) {
 		this.fileName = fileName;
 		readSuccess = readFile();
 	}
