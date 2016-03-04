@@ -28,16 +28,15 @@ public class Silver {
     //Constructor
     public Silver(String fileName) {
 	this.fileName = fileName;
-	readSuccess = readFile();
+	readFile();
     }
 
     public Silver() {
-	fileName = "ctravel.in";
-	readSuccess = readFile();
+	this("ctravel.in");
     }
 
     //Input
-    private boolean readFile() {
+    private void readFile() {
 	try {
 	    BufferedReader mainReader = new BufferedReader(new FileReader(fileName));
 	    int ind = 1; //USACO treats first line as row 1
@@ -48,12 +47,14 @@ public class Silver {
 		    rows = lineReader.nextInt();
 		    cols = lineReader.nextInt();
 		    timeLimit = lineReader.nextInt();
+		    pasture1 = new int[rows][cols];
 		} else if (ind >= 2 && ind <= rows + 1) { //map
 		    for (int col = 0; col < cols; col++) {
+			//System.out.println("Ind: " + ind + " Col: " + col);
 			if (line.charAt(col) == '.') {
-			    pasture1[ind-1][col] = 0;
+			    pasture1[ind-2][col] = 0;
 			} else {
-			    pasture1[ind-1][col] = -1;
+			    pasture1[ind-2][col] = -1;
 			}
 		    }
 		} else { //last line
@@ -62,25 +63,26 @@ public class Silver {
 		    endR = lineReader.nextInt();
 		    endC = lineReader.nextInt();
 		}
+		ind++;
 	    }
-	    return true;
+	    readSuccess = true;
 	} catch(FileNotFoundException e) {
 	    System.out.println("ERROR: Couldn't open file " + fileName);
-	    return false;
+	    readSuccess = false;
 	} catch(IOException e) {
 	    System.out.println("ERROR: Couldn't read file " + fileName);
-	    return false;
+	    readSuccess = false;
 	}
     }
 
-    public String toStringPasture() {
+    public String toString() {
 	String pastureStr = "";
 	for (int row = 0; row < rows; row++) {
 	    String rowStr = "";
 	    for (int col = 0; col < cols; col++) {
-		rowStr += pasture1[row][col] + ' ';
+		rowStr += pasture1[row][col] + "\t";
 	    }
-	    pastureStr = rowStr + '\n';
+	    pastureStr += rowStr + "\n";
 	}
 	return pastureStr;
     }
