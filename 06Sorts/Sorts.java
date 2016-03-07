@@ -219,13 +219,14 @@ public class Sorts{
 			System.out.println(Arrays.toString(test6b));
 			bubbleSort(test6b);
 			System.out.println(Arrays.toString(test6b));
-		} else if (args[0].equals("insertion") || args[0].equals("selection") || args[0].equals("bubble")) { //If a known sort algo is specified
+	} else if (args[0].equals("insertion") || args[0].equals("selection") || args[0].equals("bubble") || args[0].equals("merge")) { //If a known sort algo is specified
 			int[] largeTest = new int[100000]; //Create test array
 			int[] comparisonArray = new int[largeTest.length]; //Create array for default algo comparison
 			Random randGen = new Random(); //Fill with random integers
 			for (int i = 0; i < largeTest.length; i++){
 				largeTest[i] = randGen.nextInt(100000) - 50000;
 			}
+			//System.out.println("Original: " + Arrays.toString(largeTest));
 			if (args.length == 2 && args[1].equals("verify")){ //If verification option specified, copy main test array into comparison
 				System.arraycopy(largeTest, 0, comparisonArray, 0, largeTest.length);
 			}
@@ -235,7 +236,10 @@ public class Sorts{
 				selectionSort(largeTest);
 			} else if (args[0].equals("bubble")) {
 				bubbleSort(largeTest);
+			} else if (args[0].equals("merge")) {
+			    mergeSort(largeTest);
 			}
+			//System.out.println("Sorted: " + Arrays.toString(largeTest));
 			if (args.length == 2 && args[1].equals("verify")){ //If verification option specified, compare array after default sorting to chosen algo sorting
 				Arrays.sort(comparisonArray);
 				System.out.println("Sorted correctly: " + Arrays.equals(largeTest, comparisonArray));
@@ -246,7 +250,9 @@ public class Sorts{
 			for (int i = 0; i < largeTest.length; i++){
 				largeTest[i] = randGen.nextInt(100000) - 50000;
 			}
+			//System.out.println("Original: " + Arrays.toString(largeTest));
 			Arrays.sort(largeTest);
+			//System.out.println("Sorted: " + Arrays.toString(largeTest));
 	}
     }
 }
