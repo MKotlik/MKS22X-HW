@@ -46,10 +46,21 @@ public class Sorts{
 		}
     }
 
+    public static String name() {
+	return "6,Kotlik,Mikhail";
+    }
 
     //Wrapper function
     //Takes array, tries to split it into two
     public static void mergeSort(int[] data) {
+	if (data.length > 1) {
+	    mergeSortHelp(data, 0, data.length);
+	}
+
+
+    //Wrapper function w/ different name
+    //Takes array, tries to split it into two
+    public static void mergesort(int[] data) {
 	if (data.length > 1) {
 	    mergeSortHelp(data, 0, data.length);
 	}
@@ -66,6 +77,7 @@ public class Sorts{
 	    merge(data, start, mid, end);
 	}
     }
+    
 
     //Merge function
     //Merges/sorts subarrays into cohesive array
