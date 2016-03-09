@@ -28,11 +28,16 @@ public class Quick {
     }
     
     public static int quickselect(int[] data, int k) {
-	return 0;
+	if (data.length == 0) {
+	    return 0;
+	} else if (data.length == 1) {
+	    return data[0];
+	}
+	quickselectH(data, k, 0, data.length - 1);
     }
 
     private static int quickselectH(int[] data, int k, int left, int right) {
-	return 0;
+	if (right - left
     }
 
     private static int partition(int[] data, int leftInd, int rightInd) {
