@@ -50,12 +50,22 @@ public class Quick {
 	System.out.println(Arrays.toString(test5));
 	*/
     }
+
+    public static int quickSort(int[]data) {
+	quickSort(data, 0, data.length-1);
+    }
+
+    private static void quickSort(int[] data, int left, int right) {
+	if (left < right) {
+	    int pivot = partition(data, left, right);
+	    quickSort(data, left, k - 1);
+	    quickSort(data, k + 1, right);
+	}
+    }
     
     public static int quickselect(int[] data, int k) {
 	if (data.length == 0) {
 	    return 0;
-	} else if (data.length == 1) {
-	    return data[0];
 	}
 	return quickselectH(data, k, 0, data.length - 1);
     }
@@ -76,25 +86,25 @@ public class Quick {
 
     private static int partition(int[] data, int leftInd, int rightInd) {
 	if (data.length <= 1) {
-	    return 0;
+	    return leftInd;
 	}
-	int pivotInd = (int)(Math.random() * (rightInd - leftInd)) + leftInd;
+	int pivotInd = (int)(Math.random() * (rightInd - leftInd + 1)) + leftInd; //+1 necessary to reach rightInd
+	swap(data, pivotInd, rightInd);
 	int swapInd = leftInd;
-	int swap = data[rightInd];
-	data[rightInd] = data[pivotInd];
-	data[pivotInd] = swap;
 	for (int i = leftInd; i < rightInd; i++) {
 	    if (data[i] < data[rightInd]) {
-		swap = data[swapInd];
-		data[swapInd] = data[i];	
-		data[i] = swap;
+		swap(data, swapInd, i);
 		swapInd++;
 	    }
 	}
-	swap = data[swapInd];
-	data[swapInd] = data[rightInd];
-	data[rightInd] = swap;
+	swap(data, swapInd, rightInd);
 	return swapInd;
+    }
+
+    private static void swap(int[] data, int a, int b) {
+	int swap = data[b];
+	data[b] = data[a];
+	data[a] = swap;
     }
 
     public static String name() {
