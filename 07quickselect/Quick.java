@@ -2,9 +2,10 @@ import java.util.Arrays;
 import java.util.Random;
 public class Quick {
     public static void main(String[]args) {
+	Random randGen = new Random();
+	int[] largeTest;
 	if (args.length > 0 && args[0].equals("large")) {
-	    Random randGen = new Random();
-	    int[] largeTest = new int[1000000]; //1 million element array
+	    largeTest = new int[1000000]; //1 million element array
 	    int[] comparisonArr = new int[1];
 	    if (args.length == 2 && args[1].equalsIgnoreCase("verify")) {
 		comparisonArr = new int[largeTest.length];
