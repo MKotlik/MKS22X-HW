@@ -127,11 +127,11 @@ public class Quick {
 	*/
     }
 
-    public static void quickSort(int[]data) {
+    public static void quickSortOld(int[]data) {
 	quickSort(data, 0, data.length-1);
     }
 
-    private static void quickSort(int[] data, int left, int right) {
+    private static void quickSortOld(int[] data, int left, int right) {
 	if (left < right) {
 	    int pivot = partition(data, left, right);
 	    quickSort(data, left, pivot - 1);
@@ -139,14 +139,14 @@ public class Quick {
 	}
     }
     
-    public static int quickselect(int[] data, int k) {
+    public static int quickselectOld(int[] data, int k) {
 	if (data.length == 0) {
 	    return 0;
 	}
 	return quickselectH(data, k, 0, data.length - 1);
     }
 
-    private static int quickselectH(int[] data, int k, int left, int right) {
+    private static int quickselectHOld(int[] data, int k, int left, int right) {
 	if (right == left) {
 	    return data[right];
 	}
@@ -158,6 +158,23 @@ public class Quick {
 	} else { //same as (k > pivotInd)
 	    return quickselectH(data, k, pivotInd + 1, right);
 	}
+    }
+
+    private static int partitionOld(int[] data, int leftInd, int rightInd) {
+	if (data.length <= 1) {
+	    return leftInd;
+	}
+	int pivotInd = (int)(Math.random() * (rightInd - leftInd + 1)) + leftInd; //+1 necessary to reach rightInd
+	swap(data, pivotInd, rightInd);
+	int swapInd = leftInd;
+	for (int i = leftInd; i < rightInd; i++) {
+	    if (data[i] < data[rightInd]) {
+		swap(data, swapInd, i);
+		swapInd++;
+	    }
+	}
+	swap(data, swapInd, rightInd);
+	return swapInd;
     }
 
     private static int partition(int[] data, int leftInd, int rightInd) {
