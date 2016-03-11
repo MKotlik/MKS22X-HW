@@ -1,26 +1,53 @@
 import java.util.Arrays;
 import java.util.Random;
 public class Quick {
+    //possible command call:
+    //java Quick
+    //java Quick small/large [verify] [print]
+    //java Quick size <some num> [verify]
+    
     public static void main(String[]args) {
 	Random randGen = new Random();
 	int[] largeTest;
-	if (args.length > 0 && args[0].equals("large")) {
-	    largeTest = new int[1000000]; //1 million element array
-	    int[] comparisonArr = new int[1];
-	    if (args.length == 2 && args[1].equalsIgnoreCase("verify")) {
-		comparisonArr = new int[largeTest.length];
-	    }
-	    for (int i = 0; i < largeTest.length; i++) {
-		largeTest[i] = randGen.nextInt(100001) - 50000;
-		//Ints from -50,000 to 50,000
-		if (args.length == 2 && args[1].equalsIgnoreCase("verify")) {
-		    comparisonArr[i] = largeTest[i];
+	int[] comparisonArr;
+	boolean verify;
+	boolean large;
+	boolean sizeOption;
+	boolean print;
+	if (args.length > 0 && 
+	    (args[0].equalsIgnoreCase("large") || args[0].equalsIgnoreCase("small"))) {
+		if (args[0].equalsIgnoreCase("large")) {
+		    largeTest = new int[1000000]; //1 million element array
+		} else {
+		    largeTest = new int[100]; //100 element array
 		}
-	    }
-	    quickSort(largeTest);
-	    if (args.length == 2 && args[1].equalsIgnoreCase("verify")) {
-		System.out.println("Sorted correctly: " + Arrays.equals(largeTest, comparisonArr));
-	    }
+		if (args.length >= 2 && args[1].equalsIgnoreCase("verify")) {
+		    comparisonArr = new int[largeTest.length];
+		} else {
+		    comparisonArr = new int[1];
+		}
+		for (int i = 0; i < largeTest.length; i++) {
+		    largeTest[i] = randGen.nextInt(100001) - 50000;
+		    //Ints from -50,000 to 50,000
+		    if (args.length >= 2 && args[1].equalsIgnoreCase("verify")) {
+			comparisonArr[i] = largeTest[i];
+		    }
+		}
+		if (args.length == 3 && args[2].equalsIgnoreCase("print") ||
+		    args.length == 2 && args[1].equalsIgnoreCase("print")) {
+		    System.out.println("===Original Array===");
+		    System.out.println(Arrays.toString(largeTest));
+		}
+		quickSort(largeTest);
+		Arrays.sort(comparisonArr);
+		if (args.length == 3 && args[2].equalsIgnoreCase("print") ||
+		    (args.length == 2 && args[1].equalsIgnoreCase("print"))) {
+		    System.out.println("===Sorted Array===");
+		    System.out.println(Arrays.toString(largeTest));
+		}
+		if (args.length >= 2 && args[1].equalsIgnoreCase("verify")) {
+		    System.out.println("Sorted correctly: " + Arrays.equals(largeTest, comparisonArr));
+		}	
 	} else {
 	    //Sort Tests
 	    int[] test1 = {};
