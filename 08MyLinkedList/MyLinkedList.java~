@@ -1,0 +1,20 @@
+public class MyLinkedList {
+    //Variables
+
+    //Constructor
+
+    //Accessors/Getters
+
+    //Mutators/Setters
+
+    //LNode Inner Class
+    private class LNode {
+	//Variables
+	
+	//Constructors
+
+	//Getters
+
+	//Setters
+    }
+}
