@@ -9,6 +9,19 @@ public class MyLinkedList {
 	size = 1;
     }
 
+    public MyLinkedList(int[] srcArr) {
+	if (srcArr.length > 0) {
+	    start = new LNode(srcArr[0]);
+	    size = 1;
+	    for (int i = 1; i < srcArr.length; i++) {
+		add(srcArr[i]);
+	    }
+	} else {
+	    start = new LNode();
+	    size = 1;
+	}
+    }
+
     //Constructor with size
 
     //Accessors/Getters
@@ -19,11 +32,10 @@ public class MyLinkedList {
 	return size;
     }
 
-
     //public int get(index)
     //Get value at specified index
     public int get(int index) throws IndexOutOfBoundsException{
-	if (index >= size) {
+	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	} else {
 	    LNode current = start;
@@ -32,6 +44,35 @@ public class MyLinkedList {
 	    }
 	    return current.getData();
 	}
+    }
+
+    //public int indexOf(value)
+    //Returns index of specified value in linked list, -1 if not found
+    public int indexOf(int value) {
+	LNode current = start;
+	for (int i = 0; i < size; i++) {
+	    if (current.getData() == value) {
+		return i;
+	    } else {
+		current = current.getNext();
+	    }
+	}
+	return -1;
+    }
+
+    //public String toString()
+    //Returns formatted String representation of list
+    public String toString() {
+	if (size <= 0) {
+	    return "[]";
+	}
+	String listStr = "[";
+	LNode current = start;
+	for (int i = 0; i < size; i++) {
+	    listStr += " " + current.getData() + ",";
+	    current = current.getNext();
+	}
+	return listStr.substring(0, listStr.length()-1) + " ]";
     }
 
     //Mutators/Setters
@@ -48,6 +89,57 @@ public class MyLinkedList {
 	return true;
     }
 
+    //public boolean add(index, value)
+    //Inserts LNode with value at specified location in list
+    public boolean add(int index, int value) throws IndexOutOfBoundsException {
+	if (index < 0 || index >= size) {
+	    throw new IndexOutOfBoundsException();
+	} else {
+	    LNode current = start;
+	    for (int i = 0; i < index; i++) {
+		current = current.getNext();
+	    }
+	    LNode tail = current.getNext();
+	    current.setNext(new LNode(value, tail));
+	    size++;
+	    return true;
+	}
+    }
+
+    //public int set(index, newValue)
+    //Sets value of LNode at specified location in list
+    public int set(int index, int newValue) throws IndexOutOfBoundsException {
+	if (index < 0 || index >= size) {
+	    throw new IndexOutOfBoundsException();
+	} else {
+	    LNode current = start;
+	    for (int i = 0; i < index; i++) {
+		current = current.getNext();
+	    }
+	    int oldData = current.getData();
+	    current.setData(newValue);
+	    return oldData;
+	}
+    }
+
+    //public int remove(index)
+    //Removes LNode at specified location in list
+    public int remove(int index) throws IndexOutOfBoundsException {
+	if (index < 0 || index >= size) {
+	    throw new IndexOutOfBoundsException();
+	} else {
+	    LNode current = start;
+	    for (int i = 0; i < index - 1; i++) {
+		current = current.getNext();
+	    }
+	    int oldValue = current.getNext().getData();
+	    LNode tail = current.getNext().getNext();
+	    current.setNext(tail);
+	    size--;
+	    return oldValue;
+	}
+    }
+    
     //LNode Inner Class
     private class LNode {
 	//Variables
