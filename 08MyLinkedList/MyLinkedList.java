@@ -9,6 +9,7 @@ public class MyLinkedList {
 	size = 1;
     }
 
+    //Array Based Constructor
     public MyLinkedList(int[] srcArr) {
 	if (srcArr.length > 0) {
 	    start = new LNode(srcArr[0]);
@@ -21,8 +22,6 @@ public class MyLinkedList {
 	    size = 1;
 	}
     }
-
-    //Constructor with size
 
     //Accessors/Getters
 
@@ -99,8 +98,12 @@ public class MyLinkedList {
 	    for (int i = 0; i < index; i++) {
 		current = current.getNext();
 	    }
-	    LNode tail = current.getNext();
-	    current.setNext(new LNode(value, tail));
+	    if (index == 0) {
+		start = new LNode(value, current);
+	    } else {
+		LNode tail = current.getNext();
+		current.setNext(new LNode(value, tail));
+	    }
 	    size++;
 	    return true;
 	}
@@ -132,9 +135,17 @@ public class MyLinkedList {
 	    for (int i = 0; i < index - 1; i++) {
 		current = current.getNext();
 	    }
-	    int oldValue = current.getNext().getData();
-	    LNode tail = current.getNext().getNext();
-	    current.setNext(tail);
+	    int oldValue;
+	    LNode tail;
+	    if (index == 0) {
+		oldValue = current.getData();
+		tail = current.getNext();
+		start = tail;
+	    } else {
+		oldValue = current.getNext().getData();
+		tail = current.getNext().getNext();
+		current.setNext(tail);
+	    }
 	    size--;
 	    return oldValue;
 	}

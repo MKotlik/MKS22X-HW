@@ -22,5 +22,15 @@ public class DriverLinkedList {
 	System.out.println(srcdList.indexOf(-10));
 	System.out.println(srcdList.indexOf(777));
 	//All tests passed!
+	System.out.println("0 Index Tests");
+	//0 Index remove fixed, last index tested
+	//System.out.println(srcdList);
+	//System.out.println(srcdList.remove(srcdList.size()-1));
+	//System.out.println(srcdList);
+	//0 Index add fix, passed test
+	//System.out.println(srcdList);
+	//System.out.println(srcdList.add(0, 43110));
+	//System.out.println(srcdList);
+	//System.out.println(srcdList.get(0));
     }
 }
