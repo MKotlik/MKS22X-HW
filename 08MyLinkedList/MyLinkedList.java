@@ -1,11 +1,13 @@
 public class MyLinkedList {
     //Variables
     private LNode start;
+    private LNode end;
     private int size;
 
     //Constructor
     public MyLinkedList() {
 	start = new LNode();
+	end = start;
 	size = 1;
     }
 
@@ -13,12 +15,14 @@ public class MyLinkedList {
     public MyLinkedList(int[] srcArr) {
 	if (srcArr.length > 0) {
 	    start = new LNode(srcArr[0]);
+	    end = start;
 	    size = 1;
 	    for (int i = 1; i < srcArr.length; i++) {
 		add(srcArr[i]);
 	    }
 	} else {
 	    start = new LNode();
+	    end = start;
 	    size = 1;
 	}
     }
@@ -79,11 +83,8 @@ public class MyLinkedList {
     //public boolean add(int value)
     //Adds LNode with value to end of linked list
     public boolean add(int value) {
-	LNode current = start;
-	for (int i = 1; i < size; i++) {
-	    current = current.getNext();
-	}
-	current.setNext(new LNode(value));
+	end.setNext(new LNode(value));
+	end = end.getNext();
 	size++;
 	return true;
     }
@@ -93,6 +94,8 @@ public class MyLinkedList {
     public boolean add(int index, int value) throws IndexOutOfBoundsException {
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
+	} else if (index == size - 1) {
+	    return add(value);
 	} else {
 	    LNode current = start;
 	    for (int i = 0; i < index; i++) {
