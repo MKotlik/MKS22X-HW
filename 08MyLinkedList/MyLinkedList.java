@@ -101,21 +101,16 @@ public class MyLinkedList<T> {
     //public boolean add(index, value)
     //Inserts LNode with value at specified location in list
     public boolean add(int index, T value) throws IndexOutOfBoundsException {
-	if (index < 0 || index >= size) {
+	if (index < 0 || index > size) {
 	    throw new IndexOutOfBoundsException();
-	} else if (index == size - 1) {
+	} else if (index == size) {
 	    return add(value);
 	} else {
 	    LNode<T> current = start;
 	    for (int i = 0; i < index; i++) {
 		current = current.getNext();
 	    }
-	    if (index == 0) {
-		start = new LNode<T>(value, current);
-	    } else {
-		LNode<T> tail = current.getNext();
-		current.setNext(new LNode<T>(value, tail));
-	    }
+	    current = new LNode<T>(value, current);
 	    size++;
 	    return true;
 	}
