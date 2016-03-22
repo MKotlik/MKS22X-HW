@@ -1,31 +1,33 @@
 public class MyLinkedList<T> {
     //Variables
-    private LNode start;
-    private LNode end;
+    private LNode<T> start;
+    private LNode<T> end;
     private int size;
 
     //Constructor
     public MyLinkedList() {
-	start = new LNode<T>();
-	end = start;
-	size = 1;
+	start = null;
+	end = null;
+	size = 0;
     }
 
     //Array Based Constructor
+    /*
     public MyLinkedList(int[] srcArr) {
 	if (srcArr.length > 0) {
-	    start = new LNode<T>(srcArr[0]);
+	    start = new LNode<T>(new Integer(srcArr[0]));
 	    end = start;
 	    size = 1;
 	    for (int i = 1; i < srcArr.length; i++) {
 		add(srcArr[i]);
 	    }
 	} else {
-	    start = new LNode<T>();
+	    start = new LNode<Integer>();
 	    end = start;
 	    size = 1;
 	}
     }
+    */
 
     //Accessors/Getters
 
@@ -41,7 +43,7 @@ public class MyLinkedList<T> {
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	} else {
-	    LNode current = start;
+	    LNode<T> current = start;
 	    for (int i = 1; i <= index; i++) {
 		current = current.getNext();
 	    }
@@ -52,7 +54,7 @@ public class MyLinkedList<T> {
     //public int indexOf(value)
     //Returns index of specified value in linked list, -1 if not found
     public int indexOf(T value) {
-	LNode current = start;
+	LNode<T> current = start;
 	for (int i = 0; i < size; i++) {
 	    if (current.getData().equals(value)) {
 		return i;
@@ -70,7 +72,7 @@ public class MyLinkedList<T> {
 	    return "[]";
 	}
 	String listStr = "[";
-	LNode current = start;
+	LNode<T> current = start;
 	for (int i = 0; i < size; i++) {
 	    listStr += " " + current.getData().toString() + ",";
 	    current = current.getNext();
@@ -83,10 +85,17 @@ public class MyLinkedList<T> {
     //public boolean add(int value)
     //Adds LNode with value to end of linked list
     public boolean add(T data) {
-	end.setNext(new LNode<T>(data));
-	end = end.getNext();
-	size++;
-	return true;
+	if (size == 0) {
+	    start = new LNode<T>(data);
+	    end = start;
+	    size = 1;
+	    return true;
+	} else {
+	    end.setNext(new LNode<T>(data));
+	    end = end.getNext();
+	    size++;
+	    return true;
+	}
     }
 
     //public boolean add(index, value)
@@ -158,7 +167,7 @@ public class MyLinkedList<T> {
     private class LNode<T> {
 	//Variables
 	private T data; //car, int value
-	private LNode next; //cdr, LNode tail
+	private LNode<T> next; //cdr, LNode tail
 	
 	//Constructors
 	private LNode() {
@@ -171,7 +180,7 @@ public class MyLinkedList<T> {
 	    next = null;
 	}
 
-	private LNode(T data, LNode next) {
+	private LNode(T data, LNode<T> next) {
 	    this.data = data;
 	    this.next = next;
 	}
@@ -181,7 +190,7 @@ public class MyLinkedList<T> {
 	    return data;
 	}
 
-	private LNode getNext() {
+	private LNode<T> getNext() {
 	    return next;
 	}
 
@@ -192,8 +201,8 @@ public class MyLinkedList<T> {
 	    return orig;
 	}
 
-	private LNode setNext(LNode newNode) {
-	    LNode orig = next;
+	private LNode<T> setNext(LNode<T> newNode) {
+	    LNode<T> orig = next;
 	    next = newNode;
 	    return orig;
 	}
