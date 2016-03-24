@@ -61,6 +61,7 @@ public class KDriver{
         //test adding to end/start
         m.add(0,"START");
         n.add(0,"START");
+	System.out.println(m.toString(true));
         m.add(m.size(),"PENULTIMATE");
         n.add(n.size(),"PENULTIMATE");
         System.out.println(m.toString(true));

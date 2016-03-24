@@ -1,5 +1,6 @@
 public class MyLinkedList<T> {
     //Variables
+    private boolean DEBUG = true;
     private LNode start;
     private LNode end;
     private int size;
@@ -41,7 +42,8 @@ public class MyLinkedList<T> {
     //Get value at specified index
     public T get(int index) throws IndexOutOfBoundsException{
 	if (index < 0 || index >= size) {
-	    throw new IndexOutOfBoundsException();
+	    throw new
+		IndexOutOfBoundsException("Index: "+index+", Size: "+size);
 	} else {
 	    LNode current = start;
 	    for (int i = 0; i < index; i++) {
@@ -74,6 +76,7 @@ public class MyLinkedList<T> {
 	String listStr = "[";
 	LNode current = start;
 	for (int i = 0; i < size; i++) {
+	    printDebug("i:"+i+" ,data: "+current.getData().toString());
 	    listStr += " " + current.getData().toString() + ",";
 	    current = current.getNext();
 	}
@@ -86,6 +89,12 @@ public class MyLinkedList<T> {
 		" End: " + end.getData().toString();
 	} else {
 	    return toString();
+	}
+    }
+
+    public void printDebug(String out) {
+	if (DEBUG) {
+	    System.out.println(out);
 	}
     }
 
@@ -111,7 +120,8 @@ public class MyLinkedList<T> {
     //Inserts LNode with value at specified location in list
     public boolean add(int index, T value) throws IndexOutOfBoundsException {
 	if (index < 0 || index > size) {
-	    throw new IndexOutOfBoundsException();
+	    throw new
+		IndexOutOfBoundsException("Index: "+index+", Size: "+size);
 	} else if (index == size) {
 	    return add(value);
 	} else {
@@ -133,7 +143,8 @@ public class MyLinkedList<T> {
     //Sets value of LNode at specified location in list
     public T set(int index, T newValue) throws IndexOutOfBoundsException {
 	if (index < 0 || index >= size) {
-	    throw new IndexOutOfBoundsException();
+	    throw new
+		IndexOutOfBoundsException("Index: "+index+", Size: "+size);
 	} else {
 	    LNode current = start;
 	    for (int i = 0; i < index; i++) {
@@ -149,7 +160,8 @@ public class MyLinkedList<T> {
     //Removes LNode at specified location in list
     public T remove(int index) throws IndexOutOfBoundsException {
 	if (index < 0 || index >= size) {
-	    throw new IndexOutOfBoundsException();
+	    throw new
+		IndexOutOfBoundsException("Index: "+index+", Size: "+size);
 	} else {
 	    LNode current = start;
 	    for (int i = 0; i < index - 1; i++) {
