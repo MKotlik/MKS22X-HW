@@ -1,7 +1,7 @@
 public class MyLinkedList<T> {
     //Variables
-    private LNode<T> start;
-    private LNode<T> end;
+    private LNode start;
+    private LNode end;
     private int size;
 
     //Constructor
@@ -43,8 +43,8 @@ public class MyLinkedList<T> {
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	} else {
-	    LNode<T> current = start;
-	    for (int i = 1; i <= index; i++) {
+	    LNode current = start;
+	    for (int i = 0; i < index; i++) {
 		current = current.getNext();
 	    }
 	    return current.getData();
@@ -54,7 +54,7 @@ public class MyLinkedList<T> {
     //public int indexOf(value)
     //Returns index of specified value in linked list, -1 if not found
     public int indexOf(T value) {
-	LNode<T> current = start;
+	LNode current = start;
 	for (int i = 0; i < size; i++) {
 	    if (current.getData().equals(value)) {
 		return i;
@@ -72,12 +72,21 @@ public class MyLinkedList<T> {
 	    return "[]";
 	}
 	String listStr = "[";
-	LNode<T> current = start;
+	LNode current = start;
 	for (int i = 0; i < size; i++) {
 	    listStr += " " + current.getData().toString() + ",";
 	    current = current.getNext();
 	}
 	return listStr.substring(0, listStr.length()-1) + " ]";
+    }
+
+    public String toString(boolean showHeadTail) {
+	if (showHeadTail) {
+	    return toString() + "\tStart: " + start.getData().toString() +
+		" End: " + end.getData().toString();
+	} else {
+	    return toString();
+	}
     }
 
     //Mutators/Setters
@@ -86,12 +95,12 @@ public class MyLinkedList<T> {
     //Adds LNode with value to end of linked list
     public boolean add(T data) {
 	if (size == 0) {
-	    start = new LNode<T>(data);
+	    start = new LNode(data);
 	    end = start;
 	    size = 1;
 	    return true;
 	} else {
-	    end.setNext(new LNode<T>(data));
+	    end.setNext(new LNode(data));
 	    end = end.getNext();
 	    size++;
 	    return true;
@@ -106,11 +115,15 @@ public class MyLinkedList<T> {
 	} else if (index == size) {
 	    return add(value);
 	} else {
-	    LNode<T> current = start;
-	    for (int i = 0; i < index; i++) {
+	    LNode current = start;
+	    for (int i = 0; i < index - 1; i++) {
 		current = current.getNext();
 	    }
-	    current = new LNode<T>(value, current);
+	    if (index == 0) {
+		start = new LNode(value, current);
+	    } else {
+		current.setNext(new LNode(value, current.getNext()));
+	    }
 	    size++;
 	    return true;
 	}
@@ -122,7 +135,7 @@ public class MyLinkedList<T> {
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	} else {
-	    LNode<T> current = start;
+	    LNode current = start;
 	    for (int i = 0; i < index; i++) {
 		current = current.getNext();
 	    }
@@ -138,12 +151,12 @@ public class MyLinkedList<T> {
 	if (index < 0 || index >= size) {
 	    throw new IndexOutOfBoundsException();
 	} else {
-	    LNode<T> current = start;
+	    LNode current = start;
 	    for (int i = 0; i < index - 1; i++) {
 		current = current.getNext();
 	    }
 	    T oldValue;
-	    LNode<T> tail;
+	    LNode tail;
 	    if (index == 0) {
 		oldValue = current.getData();
 		tail = current.getNext();
@@ -159,10 +172,10 @@ public class MyLinkedList<T> {
     }
     
     //LNode Inner Class
-    private class LNode<T> {
+    private class LNode {
 	//Variables
 	private T data; //car, int value
-	private LNode<T> next; //cdr, LNode tail
+	private LNode next; //cdr, LNode tail
 	
 	//Constructors
 	private LNode() {
@@ -175,7 +188,7 @@ public class MyLinkedList<T> {
 	    next = null;
 	}
 
-	private LNode(T data, LNode<T> next) {
+	private LNode(T data, LNode next) {
 	    this.data = data;
 	    this.next = next;
 	}
@@ -185,7 +198,7 @@ public class MyLinkedList<T> {
 	    return data;
 	}
 
-	private LNode<T> getNext() {
+	private LNode getNext() {
 	    return next;
 	}
 
@@ -196,8 +209,8 @@ public class MyLinkedList<T> {
 	    return orig;
 	}
 
-	private LNode<T> setNext(LNode<T> newNode) {
-	    LNode<T> orig = next;
+	private LNode setNext(LNode newNode) {
+	    LNode orig = next;
 	    next = newNode;
 	    return orig;
 	}
