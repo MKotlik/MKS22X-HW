@@ -4,6 +4,14 @@ public class DriverLinkedList {
 	for (int i = 0; i < 10; i++) {
 	    strList.add(""+i);
 	}
+	for (String el : strList) {
+	    System.out.print(el + " ");
+	}
+	/*
+	MyLinkedList<String> strList = new MyLinkedList<String>();
+	for (int i = 0; i < 10; i++) {
+	    strList.add(""+i);
+	}
 	System.out.println(strList.toString(true));
 	strList.remove(0);
 	System.out.println(strList.toString(true));
@@ -15,7 +23,7 @@ public class DriverLinkedList {
 	System.out.println(strList.toString(true));
 	strList.add(strList.size(), "LAST");
 	System.out.println(strList.toString(true));
-	
+	*/
 	/*
 	MyLinkedList<String> strList = new MyLinkedList<String>();
 	System.out.println(strList);

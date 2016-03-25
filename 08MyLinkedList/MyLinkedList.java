@@ -1,4 +1,5 @@
-public class MyLinkedList<T> {
+import java.util.*;
+public class MyLinkedList<T> implements Iterable<T>{
     //Variables
     private boolean DEBUG = false;
     private LNode start;
@@ -65,6 +66,12 @@ public class MyLinkedList<T> {
 	    }
 	}
 	return -1;
+    }
+
+    //public MLIterator<T> iterator()
+    //returns an MLIterator<T> over the list
+    public MLIterator iterator() {
+	return new MLIterator(this);
     }
 
     //public String toString()
@@ -185,6 +192,40 @@ public class MyLinkedList<T> {
 	    return oldValue;
 	}
     }
+
+    public class MLIterator implements Iterator<T> {
+	//Variables
+	private MyLinkedList<T> source;
+	private LNode next;
+
+	//Constructor
+	public MLIterator(MyLinkedList<T> src) {
+	    source = src;
+	    if (source.size() != 0) {
+		next = start;
+	    } else {
+		next = null;
+	    }
+	}
+	public boolean hasNext() {
+	    return next != null;
+	}
+
+	public T next() throws NoSuchElementException {
+	    if (hasNext()) {
+		T curData = next.getData();
+		next = next.getNext();
+		return curData;
+	    } else {
+		throw new NoSuchElementException();
+	    }
+	}
+
+	public void remove() throws UnsupportedOperationException {
+	    throw new UnsupportedOperationException();
+	}
+    }
+
     
     //LNode Inner Class
     private class LNode {
