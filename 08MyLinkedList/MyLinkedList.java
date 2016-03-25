@@ -1,6 +1,6 @@
 public class MyLinkedList<T> {
     //Variables
-    private boolean DEBUG = true;
+    private boolean DEBUG = false;
     private LNode start;
     private LNode end;
     private int size;
@@ -76,7 +76,7 @@ public class MyLinkedList<T> {
 	String listStr = "[";
 	LNode current = start;
 	for (int i = 0; i < size; i++) {
-	    printDebug("i:"+i+" ,data: "+current.getData().toString());
+	    printDebug("i:"+i+", data: "+current.getData().toString());
 	    listStr += " " + current.getData().toString() + ",";
 	    current = current.getNext();
 	}
@@ -177,6 +177,9 @@ public class MyLinkedList<T> {
 		oldValue = current.getNext().getData();
 		tail = current.getNext().getNext();
 		current.setNext(tail);
+	    }
+	    if (index == size-1) {
+		end = current;
 	    }
 	    size--;
 	    return oldValue;

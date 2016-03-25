@@ -1,6 +1,23 @@
 public class DriverLinkedList {
     public static void main(String[]args) {
 	MyLinkedList<String> strList = new MyLinkedList<String>();
+	for (int i = 0; i < 10; i++) {
+	    strList.add(""+i);
+	}
+	System.out.println(strList.toString(true));
+	strList.remove(0);
+	System.out.println(strList.toString(true));
+	strList.remove(2);
+	System.out.println(strList.toString(true));
+	strList.remove(strList.size()-1);
+	System.out.println(strList.toString(true));
+	strList.add(0, "START");
+	System.out.println(strList.toString(true));
+	strList.add(strList.size(), "LAST");
+	System.out.println(strList.toString(true));
+	
+	/*
+	MyLinkedList<String> strList = new MyLinkedList<String>();
 	System.out.println(strList);
 	System.out.println(strList.add("hello"));
 	strList.add("from");
@@ -21,7 +38,7 @@ public class DriverLinkedList {
 	System.out.println(strList);
 	System.out.println(strList.indexOf("the"));
 	System.out.println(strList.indexOf("tfasffasdf"));
-	
+	*/
 	/*
 	MyLinkedList newList = new MyLinkedList();
 	System.out.println(newList.get(0));

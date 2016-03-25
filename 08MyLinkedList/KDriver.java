@@ -96,8 +96,9 @@ public class KDriver{
         System.out.println(m.toString(true));
         System.out.println(n);
 
-        /*test speed of add in front and at end.
-        long start,end;
+        //test speed of add in front and at end.
+	long start,end;
+	
         System.out.println("Add 100k to front");
 
         start = System.currentTimeMillis();
@@ -127,6 +128,6 @@ public class KDriver{
         end = System.currentTimeMillis();
         System.out.println( "LinkedList "+(end-start)/1000.0 );
 
-        */
+        
     }
 }
