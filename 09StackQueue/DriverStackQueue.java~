@@ -1,0 +1,6 @@
+public class DriverStackQueue {
+    public static void main(String[]args) {
+	MyStack<String> stackA = new MyStack<String>();
+	MyQueue<String> queueA = new MyQueue<String>();
+    }
+}
