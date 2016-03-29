@@ -1,7 +1,8 @@
 import java.util.*;
 public class ParenDemo {
+    private static boolean msgOut = false;
     
-    public static void main(String[]args){
+    public static void main(String[]args){	
 	String input = "()()(([[]]))";
 	if(args.length > 0){
 	    input = args[0];
@@ -26,9 +27,17 @@ public class ParenDemo {
 		if (!openStack.isEmpty() && openStack.peek().equals(openParens.get(closeParens.indexOf(cur)))) {
 		    openStack.pop();
 		} else {
+		    if (msgOut) {
+			System.out.println("Mismatched " + cur + " at position " + i);
+		    }
 		    return false;
 		}
 	    }
+	}
+	if (msgOut && !openStack.isEmpty()) {
+	    System.out.println("Mismatched " + openStack.peek());
+	} else if (msgOut) {
+	    System.out.println("All parens matched");
 	}
 	return openStack.isEmpty();
     }
