@@ -8,11 +8,11 @@ public class DriverStackQueue {
 	    stackA.push(i+"");
 	    queueA.enqueue(i+"");
 	}
-
+	
 	System.out.println("Stack: " + stackA);
 	System.out.println("Queue: " + queueA);
 
-	System.out.println("Stack Tests");
+	System.out.println("\nStack Tests");
 	System.out.println("Peek: " + stackA.peek());
 	System.out.println("Pop: " + stackA.pop());
 	System.out.println("Pop again: " + stackA.pop());
@@ -60,6 +60,12 @@ public class DriverStackQueue {
 	    System.out.println("Success! Error on empty dequeue.");
 	}
 	
-	
+	System.out.println("\nVerify Random Operations, Stack");
+	MyStack<String> stackB = new MyStack<String>();
+	Stack<String> verStack = new Stack<String>();
+	Random rand = new Random();
+	for (int i = 0; i < 5000; i++) {
+	    
+	}
     }
 }
