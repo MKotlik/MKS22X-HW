@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.*;
 public class DriverStackQueue {
     public static void main(String[]args) {
 	MyStack<String> stackA = new MyStack<String>();
@@ -64,8 +65,38 @@ public class DriverStackQueue {
 	MyStack<String> stackB = new MyStack<String>();
 	Stack<String> verStack = new Stack<String>();
 	Random rand = new Random();
-	for (int i = 0; i < 5000; i++) {
-	    
+	for (int i = 0; i < 6000; i++) {
+	    int choose = rand.nextInt(2);
+	    if (choose == 0 || stackB.isEmpty() || verStack.isEmpty()) {
+		stackB.push(""+i);
+		verStack.push(""+i);
+		//verStack.push(""+i*2); //Testing if check works
+	    } else {
+		if (!stackB.pop().equals(verStack.pop())) {
+		    System.out.println("Non matching elements poppped");
+		    break;
+		}
+	    }
 	}
+	System.out.println("Finished verifying random operations, Stack");
+
+	System.out.println("\nVerify Random Operations, Queue");
+	MyQueue<String> queueB = new MyQueue<String>();
+	ConcurrentLinkedQueue<String> verQueue = new ConcurrentLinkedQueue<String>();
+	rand = new Random();
+	for (int i = 0; i < 6000; i++) {
+	    int choose = rand.nextInt(2);
+	    if (choose == 0 || queueB.isEmpty() || verQueue.isEmpty()) {
+		queueB.enqueue(""+i);
+		verQueue.add(""+i);
+		//verQueue.add(""+i*2); //Testing if check works
+	    } else {
+		if (!queueB.dequeue().equals(verQueue.poll())) {
+		    System.out.println("Non matching elements dequeued");
+		    break;
+		}
+	    }
+	}
+	System.out.println("Finished verifying random operations, Queue");
     }
 }
