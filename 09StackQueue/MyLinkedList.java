@@ -232,26 +232,40 @@ public class MyLinkedList<T> implements Iterable<T>{
 	//Variables
 	private T data; //car, int value
 	private LNode next; //cdr, LNode tail
+	private LNode prev;
 	
 	//Constructors
 	private LNode() {
 	    data = null;
+	    prev = null;
 	    next = null;
 	}
 
 	private LNode(T data) {
 	    this.data = data;
+	    prev = null;
 	    next = null;
 	}
 
 	private LNode(T data, LNode next) {
 	    this.data = data;
+	    prev = null;
+	    this.next = next;
+	}
+
+	private LNode(T data, LNode prev, LNode next) {
+	    this.data = data;
+	    this.prev = prev;
 	    this.next = next;
 	}
 
 	//Getters
 	private T getData() {
 	    return data;
+	}
+
+	private LNode getPrev() {
+	    return prev;
 	}
 
 	private LNode getNext() {
@@ -262,6 +276,12 @@ public class MyLinkedList<T> implements Iterable<T>{
 	private T setData(T newData) {
 	    T orig = data;
 	    data = newData;
+	    return orig;
+	}
+
+	private LNode setPrev(LNode newNode) {
+	    LNode orig = prev;
+	    prev = newNode;
 	    return orig;
 	}
 
