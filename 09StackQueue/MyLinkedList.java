@@ -111,12 +111,12 @@ public class MyLinkedList<T> implements Iterable<T>{
     //Adds LNode with value to end of linked list
     public boolean add(T data) {
 	if (size == 0) {
-	    start = new LNode(data);
+	    start = new LNode(data, null, null);
 	    end = start;
 	    size = 1;
 	    return true;
 	} else {
-	    end.setNext(new LNode(data));
+	    end.setNext(new LNode(data, end, null));
 	    end = end.getNext();
 	    size++;
 	    return true;
@@ -137,9 +137,9 @@ public class MyLinkedList<T> implements Iterable<T>{
 		current = current.getNext();
 	    }
 	    if (index == 0) {
-		start = new LNode(value, current);
+		start = new LNode(value, null, current);
 	    } else {
-		current.setNext(new LNode(value, current.getNext()));
+		current.setNext(new LNode(value, current, current.getNext()));
 	    }
 	    size++;
 	    return true;
@@ -179,10 +179,12 @@ public class MyLinkedList<T> implements Iterable<T>{
 	    if (index == 0) {
 		oldValue = current.getData();
 		tail = current.getNext();
+		tail.setPrev(null);
 		start = tail;
 	    } else {
 		oldValue = current.getNext().getData();
 		tail = current.getNext().getNext();
+		tail.setPrev(current.getNext());
 		current.setNext(tail);
 	    }
 	    if (index == size-1) {
