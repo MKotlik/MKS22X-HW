@@ -171,21 +171,20 @@ public class MyLinkedList<T> implements Iterable<T>{
 		IndexOutOfBoundsException("Index: "+index+", Size: "+size);
 	} else {
 	    LNode current = start;
-	    for (int i = 0; i < index - 1; i++) {
+	    for (int i = 0; i < index; i++) {
 		current = current.getNext();
 	    }
-	    T oldValue;
-	    LNode tail;
+	    T oldValue = current.getData();
 	    if (index == 0) {
-		oldValue = current.getData();
-		tail = current.getNext();
-		tail.setPrev(null);
-		start = tail;
+		if (index != size - 1) {
+		    current.getNext().setPrev(null);
+		}
+		start = current.getNext();
+	    } else if (index == size - 1) {
+		current.getPrev().setNext(null);
 	    } else {
-		oldValue = current.getNext().getData();
-		tail = current.getNext().getNext();
-		tail.setPrev(current.getNext());
-		current.setNext(tail);
+		current.getPrev().setNext(current.getNext());
+		current.getNext().setPrev(current.getPrev());
 	    }
 	    if (index == size-1) {
 		end = current;
