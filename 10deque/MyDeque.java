@@ -17,6 +17,14 @@ public class MyDeque<T> {
 	end = 0;
     }
 
+    //suppress this ONE function from
+    //having warnings.
+    //@SuppressWarnings("unchecked")
+    private void grow() {
+	T[] newData = (T[]) new Object[data.length * 2];
+	
+    }
+
     public T getFirst() throws NoSuchElementException{
 	if (size == 0) {
 	    throw new NoSuchElementException();
@@ -43,7 +51,7 @@ public class MyDeque<T> {
 
     
     public void addFirst(T value) {
-
+	
     }
 
     public void addLast(T value) {
