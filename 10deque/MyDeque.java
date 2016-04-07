@@ -41,6 +41,21 @@ public class MyDeque<T> {
 	data = newData;
     }
 
+    public int size() {
+	return size;
+    }
+
+    public String toString() {
+	if (size == 0) {
+	    return "[]";
+	}
+	String retStr = "[";
+	for (int i = 0; i < data.length; i++) {
+	    retStr += data[i] + ", ";
+	}
+	return retStr.substring(0, retStr.length() - 2) + "]";
+    }
+
     public T getFirst() throws NoSuchElementException{
 	if (size == 0) {
 	    throw new NoSuchElementException();
@@ -68,6 +83,7 @@ public class MyDeque<T> {
 	} else {
 	    start++;
 	}
+	size--;
 	return oldValue;
     }
 
@@ -81,6 +97,7 @@ public class MyDeque<T> {
 	} else {
 	    end--;
 	}
+	size--;
 	return oldValue;
     }
 
@@ -95,6 +112,7 @@ public class MyDeque<T> {
 	    start--;
 	}
 	data[start] = value;
+	size++;
     }
 
     public void addLast(T value) {
@@ -103,9 +121,10 @@ public class MyDeque<T> {
 	}
 	if (end == data.length - 1) {
 	    end = 0;
-	} else {
+	} else  {
 	    end++;
 	}
-	data[end] = value;
+	
+	size++;
     }
 }
