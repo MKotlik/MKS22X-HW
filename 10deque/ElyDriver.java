@@ -11,8 +11,7 @@ public class ElyDriver{
 	    a.addFirst(c);
 	    b.addFirst(c);
 	}
-	a.addFirst(12312);
-	
+		
 	//System.out.println(a==b); //assuming that there is a toString for MyDeque
 	//System.out.println(b); //assuming that there is a toString for Deque
 	int counter=0;
