@@ -28,24 +28,31 @@ public class MyDeque<T> {
 	if (end < start) {
 	    limit = data.length;
 	} else {
-	    limit = end;
+	    limit = end + 1;
 	}
 	for (i = start; i < limit; i++) {
 	    newData[newInd] = data[i];
+	    //System.out.println(Arrays.toString(newData) + " Ind: " + newInd + " i: " + i);
 	    if (end < start && i == data.length-1) {
-		i = 0;
+		i = -1;
 		limit = end + 1;
 	    }
 	    newInd++;
 	}
 	data = newData;
+	start = 0;
+	end = newInd - 1;
     }
 
     public int size() {
 	return size;
     }
 
-    public String toString() {
+    public boolean isEmpty() {
+	return size == 0;
+    }
+
+    public String toStringOld() {
 	if (size == 0) {
 	    return "[]";
 	}
@@ -54,6 +61,14 @@ public class MyDeque<T> {
 	    retStr += data[i] + ", ";
 	}
 	return retStr.substring(0, retStr.length() - 2) + "]";
+    }
+
+    public String toString() {
+	return Arrays.toString(data);
+    }
+
+    public String toStringDebug() {
+	return toString() + " Size: " + size + " Start: " + start + " End: " + end;
     }
 
     public T getFirst() throws NoSuchElementException{
@@ -78,6 +93,7 @@ public class MyDeque<T> {
 	    throw new NoSuchElementException();
 	}
 	T oldValue = data[start];
+	data[start] = null;
 	if (start == data.length - 1) {
 	    start = 0;
 	} else {
@@ -92,6 +108,7 @@ public class MyDeque<T> {
 	    throw new NoSuchElementException();
 	}
 	T oldValue = data[end];
+	data[end] = null;
 	if (end == 0) {
 	    end = data.length - 1;
 	} else {
@@ -106,10 +123,12 @@ public class MyDeque<T> {
 	if (size == data.length) {
 	    grow();
 	}
-	if (start == 0) {
-	    start = data.length - 1;
-	} else {
-	    start--;
+	if (size > 0) {
+	    if (start == 0) {
+		start = data.length - 1;
+	    } else {
+		start--;
+	    }
 	}
 	data[start] = value;
 	size++;
@@ -119,12 +138,14 @@ public class MyDeque<T> {
 	if (size == data.length) {
 	    grow();
 	}
-	if (end == data.length - 1) {
-	    end = 0;
-	} else  {
-	    end++;
+	if (size > 0) {
+	    if (end == data.length - 1) {
+		end = 0;
+	    } else  {
+		end++;
+	    }
 	}
-	
+	data[end] = value;
 	size++;
     }
 }
