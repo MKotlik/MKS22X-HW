@@ -5,38 +5,33 @@ public class FrontierQueue<T> implements Frontier<T>{
     /***You can extend another class OR wrap around it***/
 
     //Instance variables
-    private ArrayDeque<T> paths;
-    private Iterator<T> pathIterator;
+    private ArrayDeque<T> nodes;
 
     //Constructor
     public FrontierQueue() {
-	paths = new ArrayDeque<T>();
-	pathIterator = paths.iterator();
+	nodes = new ArrayDeque<T>();
     }
 
     //add
     public void add(T element) {
-	paths.add(element);
+	nodes.add(element);
     }
 
     //next
     public T next() throws NoSuchElementException {
-	//alternatively, I could just call pathIterator.next()
-	//and pass or catch/rethrow the exception it throws
-	//what is preferred in coding conventions?
-	if (! hasNext()) {
+	if (nodes.isEmpty()) {
 	    throw new NoSuchElementException();
 	}
-	return pathIterator.next();
+	return nodes.remove();
     }
    
     //hasNext
     public boolean hasNext() {
-	return pathIterator.hasNext();
+	return !nodes.isEmpty();
     }
 
     //iterator
     public Iterator<T> iterator() {
-	return paths.iterator();
+	return nodes.iterator();
     }
 }

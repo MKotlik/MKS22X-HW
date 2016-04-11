@@ -8,9 +8,23 @@ public class NodePath implements Iterable<Integer[]> {
 	nodes = new ArrayDeque<Integer[]>();
     }
 
+    public NodePath(int row, int col) {
+	nodes = new ArrayDeque<Integer[]>();
+	add(row,col);
+    }
+
+    public NodePath(NodePath prev, int row, int col) {
+	nodes = prev.copyDeque();
+	add(row,col);
+    }
+
     //getlast
     public Integer[] getEnd(){
 	return nodes.getFirst();
+    }
+
+    private ArrayDeque<Integer[]> copyDeque() {
+	return nodes.clone();
     }
     
     //add
