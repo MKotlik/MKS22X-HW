@@ -62,22 +62,7 @@ public class BetterMaze{
     **/
     public int[] solutionCoordinates(){
         /** IMPLEMENT THIS **/      
-	if (placesToGo == null) {
-	    int[] ret = {};
-	    return ret;
-	}
-	Node lastNode = placesToGo.next();
-	int[] retArr = new int[lastNode.getSize() * 2];
-	Node current = lastNode;
-	int ind = retArr.length - 1;
-	while (current != null) {
-	    retArr[ind] = current.getRow();
-	    ind--;
-	    retArr[ind] = current.getCol();
-	    ind--;
-	    current = current.getPrev();
-	}
-	return retArr;
+	return new int[1];
     }    
 
 
