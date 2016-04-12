@@ -84,28 +84,53 @@ public class BetterMaze{
     /**initialize the frontier as a queue and call solve
     **/
     public boolean solveBFS(){  
-        /** IMPLEMENT THIS **/      
-	return false;
+        placesToGo = new FrontierQueue<Node>();
+	return solve();
     }   
 
 
    /**initialize the frontier as a stack and call solve
     */ 
     public boolean solveDFS(){  
-        /** IMPLEMENT THIS **/  
-	return false;
+        placesToGo = new FrontierStack<Node>();
+	return solve();
     }    
 
    /**Search for the end of the maze using the frontier. 
       Keep going until you find a solution or run out of elements on the frontier.
     **/
     private boolean solve(){  
-        /** IMPLEMENT THIS **/  
-	return false;
-    }    
+        if (startRow == -1) {
+	    solution = {};
+	    return false;
+	}
+	placesToGo.add(new Node(startRow, startCol));
+	maze[startRow][startCol] = '.';
+	boolean solved = false;
+	while (placesToGo.hasNext() && !solved) {
+	    Node current = placesToGo.next();
+	    solved = isEnd(current);
+	    if (!solved) {
+		processNext(current);
+	    }
+	}
+	if (solved) {
+	    makeSolution();
+	    return true;
+	} else {
+	    solution = {};
+	    return false;
+	}
+    }
+
+    private void processNext(Node current) {
+	Array
+    }
      
    /**mutator for the animate variable  **/
-    public void setAnimate(boolean b){  /** IMPLEMENT THIS **/ }    
+    public void setAnimate(boolean b){
+	animate = b;
+    }    
 
 
     public BetterMaze(String filename){
