@@ -62,22 +62,10 @@ public class BetterMaze{
     **/
     public int[] solutionCoordinates(){
         /** IMPLEMENT THIS **/      
-	if (placesToGo == null) {
-	    int[] ret = {};
-	    return ret;
+	if (solution == null) {
+	    solution = new int[0];
 	}
-	Node lastNode = placesToGo.next();
-	int[] retArr = new int[lastNode.getSize() * 2];
-	Node current = lastNode;
-	int ind = retArr.length - 1;
-	while (current != null) {
-	    retArr[ind] = current.getRow();
-	    ind--;
-	    retArr[ind] = current.getCol();
-	    ind--;
-	    current = current.getPrev();
-	}
-	return retArr;
+	return solution;
     }    
 
 
@@ -101,7 +89,7 @@ public class BetterMaze{
     **/
     private boolean solve(){  
         if (startRow == -1) {
-	    solution = {};
+	    solution = new int[0];
 	    return false;
 	}
 	placesToGo.add(new Node(startRow, startCol));
@@ -118,19 +106,76 @@ public class BetterMaze{
 	    makeSolution();
 	    return true;
 	} else {
-	    solution = {};
+	    solution = new int[0];
 	    return false;
 	}
     }
 
-    private void processNext(Node current) {
-	Array
+    private void processNext(Node cur) {
+	Integer[][] neighbors = new Integer[4][2];
+	int curRow = cur.getRow();
+	int curCol = cur.getCol();
+	neighbors[0] = new Integer[] {curRow, curCol + 1};
+	neighbors[1] = new Integer[] {curRow + 1, curCol};
+	neighbors[2] = new Integer[] {curRow, curCol - 1};
+	neighbors[3] = new Integer[] {curRow - 1, curCol};
+	for (Integer[] arr : neighbors) {
+	    if (canMove(maze[arr[0]][arr[1]])) {
+		maze[arr[0]][arr[1]] = '.';
+		placesToGo.add(new Node(arr[0], arr[1], cur));
+	    }
+	}
+	/*
+	ArrayList<Integer[]> neighbors = new ArrayList<Integer[]>();
+	int curRow = cur.getRow();
+	int curCol = cur.getCol();
+	neighbors.add({curRow, curCol + 1});
+	neighbors.add({curRow + 1, curCol});
+	neighbors.add({curRow, curCol - 1});
+	neighbors.add({curRow - 1, curCol});
+	for (Integer[] arr : neighbors) {
+	    if (canMove(maze[arr.get(0)][arr.get(1)])) {
+		maze[arr.get(0)][arr.get(1)] = '.';
+		placesToGo.add(new Node(arr.get(0), arr.get(1), cur));
+	    }
+	}
+	*/
+    }
+
+    private boolean isEnd(Node cur) {
+	return 'E' == maze[cur.getRow()][cur.getCol()];
+    }
+
+    private boolean canMove(Node cur) {
+	char curSyl = maze[cur.getRow()][cur.getCol()];
+	return ' ' == curSyl || 'E' == curSyl;
+    }
+
+    private boolean canMove(char curSyl) {
+	return ' ' == curSyl || 'E' == curSyl;
     }
      
    /**mutator for the animate variable  **/
     public void setAnimate(boolean b){
 	animate = b;
-    }    
+    }
+
+    private void makeSolution() {
+	if (placesToGo == null) {
+	    solution = new int[0];
+	}
+	Node lastNode = placesToGo.next();
+	solution = new int[lastNode.getSize() * 2];
+	Node current = lastNode;
+	int ind = solution.length - 1;
+	while (current != null) {
+	    solution[ind] = current.getRow();
+	    ind--;
+	    solution[ind] = current.getCol();
+	    ind--;
+	    current = current.getPrev();
+	}
+    }
 
 
     public BetterMaze(String filename){
