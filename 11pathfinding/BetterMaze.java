@@ -89,29 +89,38 @@ public class BetterMaze{
     **/
     private boolean solve(){  
         if (startRow == -1) {
-	    solution = new int[0];
+	    //solution = new int[0];
 	    return false;
 	}
 	placesToGo.add(new Node(startRow, startCol));
-	maze[startRow][startCol] = '.';
+	//maze[startRow][startCol] = '.';
 	boolean solved = false;
 	while (placesToGo.hasNext() && !solved) {
 	    Node current = placesToGo.next();
 	    solved = isEnd(current);
 	    if (!solved) {
 		processNext(current);
+	    } else {
+		makeSolution(current);
+	    }
+	    if (animate) {
+		clearTerminal();
+		System.out.println(toString());
 	    }
 	}
+	return solved;
+	/*
 	if (solved) {
-	    makeSolution();
 	    return true;
 	} else {
 	    solution = new int[0];
 	    return false;
 	}
+	*/
     }
 
     private void processNext(Node cur) {
+	maze[cur.getRow()][cur.getCol()] = '.';
 	Integer[][] neighbors = new Integer[4][2];
 	int curRow = cur.getRow();
 	int curCol = cur.getCol();
@@ -121,7 +130,7 @@ public class BetterMaze{
 	neighbors[3] = new Integer[] {curRow - 1, curCol};
 	for (Integer[] arr : neighbors) {
 	    if (canMove(maze[arr[0]][arr[1]])) {
-		maze[arr[0]][arr[1]] = '.';
+		//maze[arr[0]][arr[1]] = '.';
 		placesToGo.add(new Node(arr[0], arr[1], cur));
 	    }
 	}
@@ -160,13 +169,12 @@ public class BetterMaze{
 	animate = b;
     }
 
-    private void makeSolution() {
+    private void makeSolution(Node endpoint) {
 	if (placesToGo == null) {
 	    solution = new int[0];
 	}
-	Node lastNode = placesToGo.next();
-	solution = new int[lastNode.getSize() * 2];
-	Node current = lastNode;
+	solution = new int[endpoint.getSize() * 2];
+	Node current = endpoint;
 	int ind = solution.length - 1;
 	while (current != null) {
 	    solution[ind] = current.getRow();
