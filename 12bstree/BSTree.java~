@@ -1,0 +1,10 @@
+public class BSTree<T extends Comparable<T>> {
+    //do not have to generatize node because it is an inner class
+    public class Node {
+	private T data;
+	private Node left;
+	private Node right;
+	
+	
+    }
+}
