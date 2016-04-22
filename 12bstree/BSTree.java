@@ -1,9 +1,17 @@
 public class BSTree<T extends Comparable<T>> {
     //do not have to generatize node because it is an inner class
     public class Node {
+	//Instance variables
 	private T data;
 	private Node left;
 	private Node right;
+
+	//Constructor
+	public Node(T newData) {
+	    data = newData;
+	    left = null;
+	    right = null;
+	}
 	
 	//setters & getters
 	public Node getLeft() {
@@ -48,6 +56,19 @@ public class BSTree<T extends Comparable<T>> {
 	}
 
 	public void add(T value){
+	    if (data.compareTo(value) > 0) {
+		if (left == null) {
+		    left = new Node(value);
+		} else {
+		    left.add(value);
+		}
+	    } else {
+		if (right == null) {
+		    right = new Node(value);
+		} else {
+		    right.add(value);
+		}
+	    }
 	}
 
 	public String toString(){
@@ -78,6 +99,7 @@ public class BSTree<T extends Comparable<T>> {
 	    }
 	}
 
+	/*
 	//OUTER methods here are wrapper methods for the root
 	public getHeight(){
 	    //call the root's methods
@@ -96,5 +118,7 @@ public class BSTree<T extends Comparable<T>> {
 	    //check for empty before you do things with root.
 	    return false;
 	}
+
+	*/
     }
 }
