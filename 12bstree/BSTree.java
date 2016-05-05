@@ -4,6 +4,11 @@ public class BSTree<T extends Comparable<T>> {
 	private T data;
 	private Node left;
 	private Node right;
+
+	//constructor
+	public Node(T newData) {
+	    data = newData;
+	}
 	
 	//setters & getters
 	public Node getLeft() {
@@ -48,6 +53,19 @@ public class BSTree<T extends Comparable<T>> {
 	}
 
 	public void add(T value){
+	    if (data.compareTo(value) > 0) {
+		if (left == null) {
+		    left = new Node(value);
+		} else {
+		    left.add(value);
+		}
+	    } else {
+		if (right == null) {
+		    right = new Node(value);
+		} else {
+		    right.add(value);
+		}
+	    }
 	}
 
 	public String toString(){
@@ -77,24 +95,51 @@ public class BSTree<T extends Comparable<T>> {
 		    data.equals(value);
 	    }
 	}
+    }
 
-	//OUTER methods here are wrapper methods for the root
-	public getHeight(){
-	    //call the root's methods
-	    //check for empty first!
-	    return root.height();
+    //BSTREE VARIABLES
+    Node root;
+
+    //BSTREE METHODS
+
+    //constructor
+    public BSTree() {
+	root = null;
+    }
+
+    public BSTree(T value) {
+	root = new Node(value);
+    }
+
+    //OUTER methods here are wrapper methods for the root
+    public int getHeight(){
+	if (root == null) {
+	    return 0;
 	}
-	
-	public void add(T value){
-	    //check for empty before you do things with root.
+	return root.height();
+    }
+    
+    public void add(T value){
+	if (root == null) {
+	    root = new Node(value);
+	} else {
+	    root.add(value);
 	}
-	public String toString(){
-	    //check for empty before you do things with root.
+    }
+
+    public String toString(){
+	if (root == null) {
 	    return "";
+	} else {
+	    return root.toString();
 	}
-	public boolean contains(T value){
-	    //check for empty before you do things with root.
+    }
+
+    public boolean contains(T value){
+	if (root == null) {
 	    return false;
+	} else {
+	    return root.contains(value);
 	}
     }
 }

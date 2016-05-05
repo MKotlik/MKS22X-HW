@@ -56,6 +56,7 @@ public class Sorts{
 	if (data.length > 1) {
 	    mergeSortHelp(data, 0, data.length);
 	}
+    }
 
 
     //Wrapper function w/ different name
@@ -131,10 +132,20 @@ public class Sorts{
 	    mergeSort(testm5);
 	    System.out.println(Arrays.toString(testm5));
 	    
-	    int[] testm6 = {112, -1, 5, 3, 7, -10, 20};
+	    int[] testm6 = {144,-36,-49,25};
 	    System.out.println(Arrays.toString(testm6));
 	    mergeSort(testm6);
 	    System.out.println(Arrays.toString(testm6));
+
+	    int[] testm7 = {-1,-2,-3,-4,-5,-6,-7,6,5,4,3,2,1};
+	    System.out.println(Arrays.toString(testm7));
+	    mergeSort(testm7);
+	    System.out.println(Arrays.toString(testm7));
+	    
+	    int[] testm8 = {112, -1, 5, 3, 7, -10, 20};
+	    System.out.println(Arrays.toString(testm8));
+	    mergeSort(testm8);
+	    System.out.println(Arrays.toString(testm8));
 	    
 	    	//SelectionSort Sort tests
 	    	System.out.println("Testing Selection Sort");
@@ -232,11 +243,11 @@ public class Sorts{
 			bubbleSort(test6b);
 			System.out.println(Arrays.toString(test6b));
 	} else if (args[0].equals("insertion") || args[0].equals("selection") || args[0].equals("bubble") || args[0].equals("merge")) { //If a known sort algo is specified
-			int[] largeTest = new int[100000]; //Create test array
+			int[] largeTest = new int[1000000]; //Create test array
 			int[] comparisonArray = new int[largeTest.length]; //Create array for default algo comparison
 			Random randGen = new Random(); //Fill with random integers
 			for (int i = 0; i < largeTest.length; i++){
-				largeTest[i] = randGen.nextInt(100000) - 50000;
+			    largeTest[i] = randGen.nextInt(100000) - 50000;
 			}
 			//System.out.println("Original: " + Arrays.toString(largeTest));
 			if (args.length == 2 && args[1].equals("verify")){ //If verification option specified, copy main test array into comparison
