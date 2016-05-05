@@ -6,17 +6,11 @@ public class BSTree<T extends Comparable<T>> {
 	private Node left;
 	private Node right;
 
-<<<<<<< HEAD
-	//constructor
-	public Node(T newData) {
-	    data = newData;
-=======
 	//Constructor
 	public Node(T newData) {
 	    data = newData;
 	    left = null;
 	    right = null;
->>>>>>> 0dede361f5e33f5b36739e8f76fbc1cdf8d4a62f
 	}
 	
 	//setters & getters
@@ -106,7 +100,6 @@ public class BSTree<T extends Comparable<T>> {
 	}
     }
 
-<<<<<<< HEAD
     //BSTREE VARIABLES
     Node root;
 
@@ -125,14 +118,6 @@ public class BSTree<T extends Comparable<T>> {
     public int getHeight(){
 	if (root == null) {
 	    return 0;
-=======
-	/*
-	//OUTER methods here are wrapper methods for the root
-	public getHeight(){
-	    //call the root's methods
-	    //check for empty first!
-	    return root.height();
->>>>>>> 0dede361f5e33f5b36739e8f76fbc1cdf8d4a62f
 	}
 	return root.height();
     }
@@ -160,6 +145,5 @@ public class BSTree<T extends Comparable<T>> {
 	    return root.contains(value);
 	}
 
-	*/
     }
 }
