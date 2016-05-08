@@ -89,13 +89,13 @@ public class BSTree<T extends Comparable<T>> {
 	public boolean contains(T value){
 	    if (! hasChildren()) {
 		return data.equals(value);
-	    } else if (left != null) {
-		return left.contains(value) || data.equals(value);
+	    } else if (left != null && right != null) {
+		return left.contains(value) || right.contains(value) || 
+		    data.equals(value);
 	    } else if (right != null) {
 		return right.contains(value) || data.equals(value);
 	    } else {
-		return right.contains(value) || left.contains(value) ||
-		    data.equals(value);
+		return left.contains(value) || data.equals(value);
 	    }
 	}
     }
