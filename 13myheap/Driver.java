@@ -3,7 +3,7 @@ public class Driver {
 	String[] input = new String[] {null, "1", "2", "5", "6", "7", "8"};
 	//String[] input = new String[] {null, "A", "B", "E", "F", "G", "H"};
 	//String[] input = new String[] {"F", "E", "C", "D", "B", "A"};
-	MyHeap<String> test1 = new MyHeap<String>(input);
+	MyHeap<String> test1 = new MyHeap<String>(input, false);
 	System.out.println(test1);
 	test1.add("-5");
 	System.out.println(test1);
