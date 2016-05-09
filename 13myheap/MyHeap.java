@@ -133,14 +133,25 @@ public class MyHeap<T extends Comparable<T>> {
 	System.arraycopy(data, 0, largerArray, 0, data.length);
 	data = largerArray;
     }
+
+    //Peek
+    public T peek() throws NoSuchElementException {
+	if (size == 0) {
+	    throw new NoSuchElementException();
+	}
+	return data[1];
+    }
     
     public String toString() {
 	if (prettyPrint) {
-	    String output = "";
+	    String output = "[";
 	    for (int i = 1; i <= size; i++) {
-		output += data[i].toString() + " ";
+		output += data[i].toString();
+		if (i+1 <= size) {
+		    output += ", ";
+		}
 	    }
-	    return output;
+	    return output + "]";
 	} else {
 	    return Arrays.toString(data) + " " + size;
 	}
