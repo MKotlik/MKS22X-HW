@@ -46,21 +46,21 @@ public class MyHeap<T extends Comparable<T>> {
 	//first check of if is unnecessary, but just-in-case
 	//check if two children
 	int swapInd = -1;
-	if (2*k < size && 2*k+1 < size) {
+	if (2*k <= size && 2*k+1 <= size) {
 	    //check which is greater
 	    if (data[2*k].compareTo(data[2*k+1]) >= 0) {
 		swapInd = 2*k;
 	    } else {
 		swapInd = 2*k+1;
 	    }
-	} else if (2*k < size) { //only left child
+	} else if (2*k <= size) { //only left child
 	    swapInd = 2*k;
 	} else { //only right child, WHICH SHOULDNT HAPPEN
 	    swapInd = 2*k+1;
 	}
 	swap(k, swapInd);
-	if ((2*swapInd < size && data[swapInd].compareTo(data[2*swapInd]) < 0) ||
-	    (2*swapInd+1 < size && data[swapInd].compareTo(data[2*swapInd+1]) < 0)) {
+	if ((2*swapInd <= size && data[swapInd].compareTo(data[2*swapInd]) < 0) ||
+	    (2*swapInd+1 <= size && data[swapInd].compareTo(data[2*swapInd+1]) < 0)) {
 	    pushDown(swapInd);
 	}
 	
@@ -69,7 +69,7 @@ public class MyHeap<T extends Comparable<T>> {
     private void pushUp(int k) {
 	int indParent = k/2;
 	swap(k, indParent);
-	System.out.println(toString());
+	//System.out.println(toString());
 	//check if indParent is not root, and if it's bigger than its parent
 	if (indParent/2 > 0 && data[indParent].compareTo(data[indParent/2]) > 0) {
 	    pushUp(indParent);
@@ -87,26 +87,34 @@ public class MyHeap<T extends Comparable<T>> {
 	//only heapify if at least 2 els
 	if (size >= 2) {
 	    //start at middle element and go backwards
-	    for (int k = (size-1)/2; k > 0; k--) {
-		if ((2*k < size && data[k].compareTo(data[2*k]) < 0) ||
-		    (2*k+1 < size && data[k].compareTo(data[2*k+1]) < 0)) {
+	    for (int k = size/2; k > 0; k--) {
+		if ((2*k <= size && data[k].compareTo(data[2*k]) < 0) ||
+		    (2*k+1 <= size && data[k].compareTo(data[2*k+1]) < 0)) {
 		    pushDown(k);
 		}
 	    }
 	}
     }
 
-    /*
-    public T delete() {
-
+    
+    public T delete() throws NoSuchElementException {
+	if (size == 0) {
+	    throw new NoSuchElementException();
+	}
+	T remValue = data[1];
+	data[1] = data[size];
+	data[size] = null;
+	size--;
+	pushDown(1);
+	return remValue;
     }
-    */
+    
     
     public void add(T x) {
 	if (size >= data.length-1) doubleSize();
-	System.out.println(toString());
+	//System.out.println(toString());
 	data[size+1] = x;
-	System.out.println(toString());
+	//System.out.println(toString());
 	size++;
 	if (size/2 > 0 && data[size].compareTo(data[size/2]) > 0) {
 	    pushUp(size);
