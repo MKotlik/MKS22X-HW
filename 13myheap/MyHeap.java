@@ -27,13 +27,14 @@ public class MyHeap<T extends Comparable<T>> {
     public MyHeap(boolean isMax) {
 	size = 0;
 	this.isMax = isMax;
-	data = null;
+	data = (T[]) new Comparable(0);
     }
 
     public MyHeap(T[] array, boolean isMax) {
-	size = array.length -1;
+	size = array.length;
 	this.isMax = isMax;
-	data = array;
+	data = (T[]) new Comparable[array.length+1];
+	System.arraycopy(array, 0, data, 1, array.length);
 	heapify();
       }
     
