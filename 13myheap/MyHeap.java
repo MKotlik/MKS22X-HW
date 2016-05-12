@@ -11,23 +11,17 @@ public class MyHeap<T extends Comparable<T>> {
 
     //Constructors
     public MyHeap() {
-	size = 0;
-	data = null;
-	isMax = true;
+	this(true);
     }
     
     public MyHeap(T[] array) {
-	size = array.length - 1;
-	isMax = true;
-	data = array;
-	heapify();
+	this(array, true);
     }
-    
     
     public MyHeap(boolean isMax) {
 	size = 0;
 	this.isMax = isMax;
-	data = (T[]) new Comparable(0);
+	data = (T[]) new Comparable[10];
     }
 
     public MyHeap(T[] array, boolean isMax) {
@@ -65,10 +59,9 @@ public class MyHeap<T extends Comparable<T>> {
 	if ((2*swapInd <= size && ((isMax && data[swapInd].compareTo(data[2*swapInd]) < 0) ||
 				   (!isMax && data[swapInd].compareTo(data[2*swapInd]) > 0))) ||
 	     (2*swapInd+1 <= size && ((isMax && data[swapInd].compareTo(data[2*swapInd+1]) < 0) ||
-				      (!isMax && data[swapInd].compareTo(data[2*swapInd]) > 0)))) {
+				      (!isMax && data[swapInd].compareTo(data[2*swapInd+1]) > 0)))) {
 	    pushDown(swapInd);
 	}
-	
     }
     
     private void pushUp(int k) {
@@ -96,7 +89,7 @@ public class MyHeap<T extends Comparable<T>> {
 		if ((2*k <= size && ((isMax && data[k].compareTo(data[2*k]) < 0) ||
 					   (!isMax && data[k].compareTo(data[2*k]) > 0))) ||
 		    (2*k+1 <= size && ((isMax && data[k].compareTo(data[2*k+1]) < 0) ||
-					     (!isMax && data[k].compareTo(data[2*k]) > 0)))) {
+					     (!isMax && data[k].compareTo(data[2*k+1]) > 0)))) {
 		    pushDown(k);
 		}
 	    }
@@ -112,7 +105,12 @@ public class MyHeap<T extends Comparable<T>> {
 	data[1] = data[size];
 	data[size] = null;
 	size--;
-	pushDown(1);
+	if ((2 <= size && ((isMax && data[1].compareTo(data[2]) < 0) ||
+				   (!isMax && data[1].compareTo(data[2]) > 0))) ||
+	     (3 <= size && ((isMax && data[1].compareTo(data[3]) < 0) ||
+				      (!isMax && data[1].compareTo(data[3]) > 0)))) {
+	    pushDown(1);
+	}
 	return remValue;
     }
     
@@ -156,6 +154,16 @@ public class MyHeap<T extends Comparable<T>> {
 	} else {
 	    return Arrays.toString(data) + " " + size;
 	}
+    }
+
+    //Size
+    public int getSize() {
+	return size;
+    }
+
+    //isEmpty
+    public boolean isEmpty() {
+	return size == 0;
     }
 
 }
